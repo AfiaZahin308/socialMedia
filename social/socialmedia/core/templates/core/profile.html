@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <h1>Your Profile</h1>
+    <a href="{% url 'create_post' %}" class="btn btn-primary mb-3">Create Post</a>
+    {% for post in posts %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.user.username }}</h5>
+                <p class="card-text">{{ post.content }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="img-fluid">
+                {% endif %}
+                <p class="text-muted">{{ post.created_at }}</p>
+                <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+        
+    {% endfor %}
+{% endblock %}
